@@ -27,24 +27,28 @@ import android.content.Intent;
 public class MainActivity extends AppCompatActivity {
     private int[][] board;
     private TextView[][] graphicsBoard;
+    private int count = 0;
+    private TextView countTextView;
 
 
     static int rows = -1;
     static int columns = -1;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        createBoard(4);
+        GridLayout field = (GridLayout) findViewById(R.id.field);
+        countTextView = findViewById(R.id.count);
+        rows = 4;
+        columns = 4;
+        fillBoard(4);
+        createBoard(field);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    protected void createBoard(int n) {
-        rows = n;
-        columns = n;
-        fillBoard(n);
-        GridLayout field = findViewById(R.id.field);
+    protected void createBoard(final GridLayout field) {
         field.post(new Runnable() {
             @Override
             public void run() {
@@ -138,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 for (int j = 0; j < rows-1; j++) {//это строки
                     if (board[j][i]==board[j+1][i]) {
+                        count+=board[j][i]+board[j+1][i];
                         board[j][i]+=board[j+1][i];
                         for (int k = j+1; k < rows-1; k++) {
                             board[k][i] = board[k+1][i];
@@ -146,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
+            countTextView.setText(String.valueOf(count));
             fillRandomField();
             updateBoard();
         }
@@ -164,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 for (int j = rows-1; j > 0; j--) {//это строки
                     if (board[j][i]==board[j-1][i]) {
+                        count+=board[j][i]+board[j-1][i];
                         board[j][i]+=board[j-1][i];
                         for (int k = j-1; k > 0; k--) {
                             board[k][i] = board[k-1][i];
@@ -172,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
+            countTextView.setText(String.valueOf(count));
             fillRandomField();
             updateBoard();
         }
@@ -190,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 for (int j = columns-1; j > 0; j--) {//это столбцы
                     if (board[i][j]==board[i][j-1]) {
+                        count+= board[i][j]+board[i][j-1];
                         board[i][j]+=board[i][j-1];
                         for (int k = j-1; k > 0; k--) {
                             board[i][k] = board[i][k-1];
@@ -198,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
+            countTextView.setText(String.valueOf(count));
             fillRandomField();
             updateBoard();
         }
@@ -216,6 +226,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 for (int j = 0; j < columns-1; j++) {//это столбцы
                     if (board[i][j]==board[i][j+1]) {
+                        count+=board[i][j]+board[i][j+1];
                         board[i][j]+=board[i][j+1];
                         for (int k = j+1; k < columns-1; k++) {
                             board[i][k] = board[i][k+1];
@@ -224,6 +235,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
+            countTextView.setText(String.valueOf(count));
             fillRandomField();
             updateBoard();
         }
