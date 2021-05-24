@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,89 +8,48 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/buttonSwitchLeft"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/header"
-        app:layout_constraintTop_toTopOf="parent">
+        android:onClick="switchLeft"
+        android:text="&lt;"
+        app:layout_constraintBottom_toTopOf="@id/buttonPlay"
+        app:layout_constraintRight_toLeftOf="@id/boardSize"
+        />
 
-        <TextView
-            android:layout_width="0dp"
-            android:id="@+id/count"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Счет:" />
+    <TextView
+        android:id="@+id/boardSize"
+        android:layout_width="84dp"
+        android:layout_height="46dp"
+        android:gravity="center"
+        android:text="4x4"
+        app:layout_constraintBottom_toTopOf="@id/buttonPlay"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"></TextView>
 
-    </LinearLayout>
-
-
-    <FrameLayout
-        android:id="@+id/fieldParent"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/buttonSwitchRight"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.75"
-        app:layout_constraintTop_toBottomOf="@+id/header">
+        android:onClick="switchRight"
+        android:text="&gt;"
+        app:layout_constraintBottom_toTopOf="@id/buttonPlay"
+        app:layout_constraintLeft_toRightOf="@id/boardSize" />
 
-        <GridLayout
-            android:id="@+id/field"
-            android:layout_width="match_parent"
-            android:layout_height="517dp"
-            android:layout_gravity="center" />
-    </FrameLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/buttonPlay"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:onClick="goPlay"
+        android:text="Play"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
 
-        <Button
-            android:id="@+id/buttonDown"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:text="Down"
-            android:onClick="moveDown"
-            app:layout_constraintTop_toBottomOf="@+id/buttonUp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            />
-        <Button
-            android:id="@+id/buttonUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:text="Up"
-            android:onClick="moveUp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            />
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
-            android:id="@+id/buttonLeft"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:text="left"
-            android:onClick="moveLeft"
-            app:layout_constraintRight_toLeftOf="@+id/buttonUp"
-            app:layout_constraintTop_toBottomOf="@+id/buttonUp"
-            />
-        <Button
-            android:id="@+id/buttonRight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:text="right"
-            android:onClick="moveRight"
-            app:layout_constraintLeft_toRightOf="@+id/buttonUp"
-            app:layout_constraintTop_toBottomOf="@+id/buttonUp"
-            />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</LinearLayout>
